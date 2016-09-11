@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-//http://odetocode.com/articles/80.aspx
-
 namespace Honjo.Tests
 {
     [TestClass]
