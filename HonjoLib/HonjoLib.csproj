@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicExpressoExpressionEvaluator.cs" />
     <Compile Include="HanjoTestHelper.cs" />
     <Compile Include="Honjo.cs" />
     <Compile Include="BladeExpressionEvaluator.cs" />
