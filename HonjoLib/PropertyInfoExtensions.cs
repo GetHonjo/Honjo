@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-namespace BladeLib
+namespace HonjoLib
 {
     public static class PropertyInfoExtensions
     {

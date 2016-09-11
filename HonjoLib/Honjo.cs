@@ -5,13 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace BladeLib
+namespace HonjoLib
 {
-    public class Blade
+    public class Honjo
     {
         private IBladeExpressionEvaluator BladeExpressionEvaluator { set; get; }
 
-        public Blade(IBladeExpressionEvaluator bladeExpressionEvaluator=null)
+        public Honjo(IBladeExpressionEvaluator bladeExpressionEvaluator=null)
         {
             BladeExpressionEvaluator = bladeExpressionEvaluator?? new NewExpressionEvaluator();// ?? new BladeExpressionEvaluator();
         }
@@ -23,7 +23,7 @@ namespace BladeLib
             var totalTimeTaken = testSetUp.RunManyTimes(testSetUp.TotalNumberOfIterationa,
                 () =>
                 {
-                    testSetUp.ActualResult = testSetUp.Blade.Compile(testSetUp.Template, testSetUp.Model);
+                    testSetUp.ActualResult = testSetUp.Honjo.Compile(testSetUp.Template, testSetUp.Model);
                 });
        
             if (trimResultBeforeAssertion)

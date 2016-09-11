@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
-namespace Blade.Tests
+namespace Honjo.Tests
 {
     public class TestHelper
     {

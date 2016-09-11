@@ -1,4 +1,4 @@
-namespace BladeLib
+namespace HonjoLib
 {
     public interface IBladeExpressionEvaluator
     {

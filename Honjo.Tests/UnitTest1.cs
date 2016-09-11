@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using BladeLib;
+using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 //http://odetocode.com/articles/80.aspx
-namespace Blade.Tests
+namespace Honjo.Tests
 {
     [TestClass]
     public class UnitTest1
@@ -23,7 +21,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "300");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod0_5()
@@ -34,7 +32,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "show me");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
         [TestMethod]
@@ -46,7 +44,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "dont");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
         [TestMethod]
@@ -58,7 +56,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "600");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod0_102()
@@ -69,7 +67,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "3.141593");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod0_101()
@@ -80,7 +78,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                  "In the year "+DateTime.Now.Year.ToString()+ ", its so easy to forget everything");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod0_4()
@@ -91,7 +89,7 @@ namespace Blade.Tests
                 new { Amount = 100 },
                 "10000");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
 
@@ -108,7 +106,7 @@ namespace Blade.Tests
                 new {  },
                 @"<div style=""display:none"">Hey!I'm invinsible</div>");
 
-            testSetUp.Blade.Test(testSetUp,true,true);
+            testSetUp.Honjo.Test(testSetUp,true,true);
         }
         [TestMethod]
         public void TestMethod0()
@@ -119,7 +117,7 @@ namespace Blade.Tests
                 new { Name = "Samuel" },
                 "Name Samuel");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod1()
@@ -130,7 +128,7 @@ namespace Blade.Tests
                 new { IsGood = true },
                 "I will do");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod1_1()
@@ -145,7 +143,7 @@ namespace Blade.Tests
                 new { IsGood = true },
                 "I will do");
 
-            testSetUp.Blade.Test(testSetUp,true,true);
+            testSetUp.Honjo.Test(testSetUp,true,true);
         }
 
        
@@ -159,7 +157,7 @@ namespace Blade.Tests
                 new { IsGood = false },
                 "yo!");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod2_1()
@@ -170,7 +168,7 @@ namespace Blade.Tests
                 new { IsGood = false },
                 "");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod2_2()
@@ -181,7 +179,7 @@ namespace Blade.Tests
                 new { IsGood = true },
                 "I will do");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod3()
@@ -192,7 +190,7 @@ namespace Blade.Tests
                 new { MyList = new List<string>() { "a", "b", "w" } },
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod3_1()
@@ -203,7 +201,7 @@ namespace Blade.Tests
                 new { MyList = new List<string>() { "a", "b", "w" } },
                 "<div>a</div><div>b</div><div>w</div>");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
         [TestMethod]
@@ -215,7 +213,7 @@ namespace Blade.Tests
                 new { MyList = new List<string>() { "a", "b", "w" } },
                 "<div>no.100:a</div><div>no.101:b</div><div>no.102:w</div>");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
         [TestMethod]
@@ -227,7 +225,7 @@ namespace Blade.Tests
                 new { },
                 "10");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
 
         [TestMethod]
@@ -239,7 +237,7 @@ namespace Blade.Tests
                 new {Amount=300 },
                 "500 is good");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod501_2()
@@ -250,7 +248,7 @@ namespace Blade.Tests
                 new { Amount = 300 },
                 "500 is good");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod3_123()
@@ -261,7 +259,7 @@ namespace Blade.Tests
                 new { MyList = new List<string>() { "a", "b", "w" } },
                 "<div>100a</div><div>100b</div><div>100w</div>");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod3_combination()
@@ -274,7 +272,7 @@ namespace Blade.Tests
                 "<div>a</div><div>b</div><div>w</div>"+
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
-            testSetUp.Blade.Test(testSetUp);
+            testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod4()
@@ -292,7 +290,7 @@ namespace Blade.Tests
                  },
                 "You.Name+Name:Sam2Sam");
 
-         var result=   testSetUp.Blade.Test(testSetUp,false);
+         var result=   testSetUp.Honjo.Test(testSetUp,false);
         }
 
         [TestMethod]
@@ -311,7 +309,7 @@ namespace Blade.Tests
                  },
                 "You.Amount+Amount:8");
 
-            var result = testSetUp.Blade.Test(testSetUp);
+            var result = testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod6()
@@ -329,7 +327,7 @@ namespace Blade.Tests
                  },
                 "You.Amount+Amount:2");
 
-            var result = testSetUp.Blade.Test(testSetUp);
+            var result = testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
         public void TestMethod7()
@@ -347,7 +345,7 @@ namespace Blade.Tests
                  },
                 "You.Amount+Amount:5");
 
-            var result = testSetUp.Blade.Test(testSetUp);
+            var result = testSetUp.Honjo.Test(testSetUp);
         }
         //todo FAILING TEST - UNABLE TO DO NESTED IFF
        // [TestMethod]
@@ -369,7 +367,7 @@ namespace Blade.Tests
                 new { IsGood = false, IsNotGood = false },
                 "yo!");
 
-            testSetUp.Blade.Test(testSetUp, true, true);
+            testSetUp.Honjo.Test(testSetUp, true, true);
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
@@ -404,7 +402,7 @@ namespace Blade.Tests
                      //} }
                  }, "", totalNumberOfIteration);
 
-            testSetUp.Blade.Test(testSetUp, false);
+            testSetUp.Honjo.Test(testSetUp, false);
         }
 
     }

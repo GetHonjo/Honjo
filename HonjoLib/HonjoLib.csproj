@@ -7,8 +7,8 @@
     <ProjectGuid>{D1221540-7EFF-4F49-8E67-AAEA412CC0BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BladeLib</RootNamespace>
-    <AssemblyName>BladeLib</AssemblyName>
+    <RootNamespace>HonjoLib</RootNamespace>
+    <AssemblyName>HonjoLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blade.cs" />
+    <Compile Include="Honjo.cs" />
     <Compile Include="BladeExpressionEvaluator.cs" />
     <Compile Include="IBladeExpressionEvaluator.cs" />
     <Compile Include="NewExpressionEvaluator.cs" />

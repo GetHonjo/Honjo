@@ -6,8 +6,8 @@
     <ProjectGuid>{2EF811D0-0D8F-477D-93ED-AEADE0E23E96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blade.Tests</RootNamespace>
-    <AssemblyName>Blade.Tests</AssemblyName>
+    <RootNamespace>Honjo.Tests</RootNamespace>
+    <AssemblyName>Honjo.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -71,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BladeLib\BladeLib.csproj">
+    <ProjectReference Include="..\HonjoLib\HonjoLib.csproj">
       <Project>{D1221540-7EFF-4F49-8E67-AAEA412CC0BA}</Project>
-      <Name>BladeLib</Name>
+      <Name>HonjoLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

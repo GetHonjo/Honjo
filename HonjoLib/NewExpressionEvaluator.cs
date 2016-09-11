@@ -1,7 +1,7 @@
 using System;
 using ExpressionEvaluator;
 
-namespace BladeLib
+namespace HonjoLib
 {
     public class NewExpressionEvaluator : IBladeExpressionEvaluator
     {

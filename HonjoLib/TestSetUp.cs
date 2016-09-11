@@ -2,13 +2,13 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace BladeLib
+namespace HonjoLib
 {
     public class TestSetUp
     {
         public TestSetUp(string template  , object model, string expected, int totalNumberOfTimesToRun=1, TimeSpan? maxAllowedExecutionTime = null)
         {
-            this.Blade = new BladeLib.Blade();
+            this.Honjo = new Honjo();
             this.Template = template;
             this.Model =model;
             this.ExpectedResult =  expected;
@@ -16,7 +16,7 @@ namespace BladeLib
             this.ActualResult = string.Empty;
             this.TotalNumberOfIterationa = totalNumberOfTimesToRun;
         }
-        public BladeLib.Blade Blade;
+        public Honjo Honjo;
         public string Template;
         public object Model;
         public string ExpectedResult;
