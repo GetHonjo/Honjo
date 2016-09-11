@@ -7,13 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Honjo.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class when_honjo_is_used
     {
 
-        
-
         [TestMethod]
-        public void TestMethod0_1()
+        public void variable_and_model_operands()
         {
 
             var testSetUp = new TestSetUp(
@@ -24,7 +22,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod0_5()
+        public void conditional_with_variable_and_model_operands1()
         {
 
             var testSetUp = new TestSetUp(
@@ -36,7 +34,7 @@ namespace Honjo.Tests
         }
 
         [TestMethod]
-        public void TestMethod0_5_1()
+        public void conditional_with_variable_and_model_operands2()
         {
 
             var testSetUp = new TestSetUp(
@@ -48,7 +46,7 @@ namespace Honjo.Tests
         }
 
         [TestMethod]
-        public void TestMethod0_100()
+        public void inline_arithmetic_operation()
         {
 
             var testSetUp = new TestSetUp(
@@ -59,7 +57,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod0_102()
+        public void using_basic_types_inline()
         {
 
             var testSetUp = new TestSetUp(
@@ -70,18 +68,18 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod0_101()
+        public void getting_dates()
         {
 
             var testSetUp = new TestSetUp(
                 "In the year {{DateTime.Now.Year}}, its so easy to forget everything",
                 new { Amount = 100 },
-                 "In the year "+DateTime.Now.Year.ToString()+ ", its so easy to forget everything");
+                 "In the year " + DateTime.Now.Year.ToString() + ", its so easy to forget everything");
 
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod0_4()
+        public void use_of_inline_variables()
         {
 
             var testSetUp = new TestSetUp(
@@ -95,21 +93,21 @@ namespace Honjo.Tests
 
 
 
-        
+
         [TestMethod]
-        public void TestMethod0_1_3()
+        public void injecting_html_style_using_variable()
         {
 
             var testSetUp = new TestSetUp(
                 @"{{var divStyle=display:none}}
                   <div style=""{{divStyle}}"">Hey!I'm invinsible</div>",
-                new {  },
+                new { },
                 @"<div style=""display:none"">Hey!I'm invinsible</div>");
 
-            testSetUp.Honjo.Test(testSetUp,true,true);
+            testSetUp.Honjo.Test(testSetUp, true, true);
         }
         [TestMethod]
-        public void TestMethod0()
+        public void basic_interpolation()
         {
 
             var testSetUp = new TestSetUp(
@@ -120,7 +118,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod1()
+        public void basic_if_else_statement()
         {
 
             var testSetUp = new TestSetUp(
@@ -131,7 +129,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod1_1()
+        public void multiline_if_else_statement()
         {
 
             var testSetUp = new TestSetUp(
@@ -143,13 +141,13 @@ namespace Honjo.Tests
                 new { IsGood = true },
                 "I will do");
 
-            testSetUp.Honjo.Test(testSetUp,true,true);
+            testSetUp.Honjo.Test(testSetUp, true, true);
         }
 
-       
+
 
         [TestMethod]
-        public void TestMethod2()
+        public void basic_if_else_statement2()
         {
 
             var testSetUp = new TestSetUp(
@@ -160,7 +158,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod2_1()
+        public void simple_if_statement()
         {
 
             var testSetUp = new TestSetUp(
@@ -171,7 +169,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod2_2()
+        public void simple_if_statement2()
         {
 
             var testSetUp = new TestSetUp(
@@ -182,7 +180,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod3()
+        public void list_of_items_with_index()
         {
 
             var testSetUp = new TestSetUp(
@@ -193,7 +191,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod3_1()
+        public void list_of_items_without_index()
         {
 
             var testSetUp = new TestSetUp(
@@ -205,7 +203,7 @@ namespace Honjo.Tests
         }
 
         [TestMethod]
-        public void TestMethod345()
+        public void list_of_items_with_index_and_inline_variable()
         {
 
             var testSetUp = new TestSetUp(
@@ -217,7 +215,7 @@ namespace Honjo.Tests
         }
 
         [TestMethod]
-        public void TestMethod500()
+        public void direct_inline_templating()
         {
 
             var testSetUp = new TestSetUp(
@@ -229,18 +227,18 @@ namespace Honjo.Tests
         }
 
         [TestMethod]
-        public void TestMethod501()
+        public void using_variables_and_model_as_opearnds()
         {
 
             var testSetUp = new TestSetUp(
                  @"{{var y=Amount}}{{var x=200}}{{y+x}} is good",
-                new {Amount=300 },
+                new { Amount = 300 },
                 "500 is good");
 
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod501_2()
+        public void using_variables_and_model_as_opearnds2()
         {
 
             var testSetUp = new TestSetUp(
@@ -251,7 +249,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod3_123()
+        public void list_of_items_with_index_and_inline_variable2()
         {
 
             var testSetUp = new TestSetUp(
@@ -262,20 +260,20 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod3_combination()
+        public void both_list_of_items_with_index_and_without_index()
         {
 
             var testSetUp = new TestSetUp(
-                 @"{{item in MyList}}<div>{{item}}</div>{{/item}}"+
+                 @"{{item in MyList}}<div>{{item}}</div>{{/item}}" +
                  @"{{item in MyList at index}}<div>no.{{index}}:{{item}}</div>{{/item}}",
                 new { MyList = new List<string>() { "a", "b", "w" } },
-                "<div>a</div><div>b</div><div>w</div>"+
+                "<div>a</div><div>b</div><div>w</div>" +
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod4()
+        public void string_concatenation_of_model_properties()
         {
 
             var testSetUp = new TestSetUp(
@@ -290,11 +288,11 @@ namespace Honjo.Tests
                  },
                 "You.Name+Name:Sam2Sam");
 
-         var result=   testSetUp.Honjo.Test(testSetUp,false);
+            var result = testSetUp.Honjo.Test(testSetUp, false);
         }
 
         [TestMethod]
-        public void TestMethod5()
+        public void model_only_operand_addition()
         {
 
             var testSetUp = new TestSetUp(
@@ -312,7 +310,7 @@ namespace Honjo.Tests
             var result = testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod6()
+        public void model_only_operand_subtraction()
         {
 
             var testSetUp = new TestSetUp(
@@ -330,7 +328,7 @@ namespace Honjo.Tests
             var result = testSetUp.Honjo.Test(testSetUp);
         }
         [TestMethod]
-        public void TestMethod7()
+        public void model_only_operand_division()
         {
 
             var testSetUp = new TestSetUp(
@@ -348,8 +346,8 @@ namespace Honjo.Tests
             var result = testSetUp.Honjo.Test(testSetUp);
         }
         //todo FAILING TEST - UNABLE TO DO NESTED IFF
-       // [TestMethod]
-        public void TestMethod1_2()
+        // [TestMethod]
+        public void nested_if_statements()
         {
 
             var testSetUp = new TestSetUp(
@@ -371,8 +369,8 @@ namespace Honjo.Tests
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
-       // [TestMethod]
-        public void LoadTest()
+        // [TestMethod]
+        public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;
             var testSetUp = new TestSetUp(
