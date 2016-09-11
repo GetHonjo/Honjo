@@ -402,17 +402,6 @@ namespace Honjo.Tests
                         IsGood = false
                     },
                     MyList = new List<string> {"a", "b", "c"}
-                    //MyBigList = new List<dynamic>() {  new
-                    //{
-                    //    Name = "100",
-                    //    Amount = 100,
-                    //    IsGood = false,
-                    //}, new
-                    //{
-                    //    Name = "1000",
-                    //    Amount =1000,
-                    //    IsGood = false,
-                    //} }
                 }, "", totalNumberOfIteration);
 
             testSetUp.Honjo.Test(testSetUp, false);
