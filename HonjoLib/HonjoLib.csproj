@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HanjoTestHelper.cs" />
     <Compile Include="Honjo.cs" />
     <Compile Include="BladeExpressionEvaluator.cs" />
     <Compile Include="IBladeExpressionEvaluator.cs" />
+    <Compile Include="MatchEvaluators.cs" />
     <Compile Include="NewExpressionEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyInfoExtensions.cs" />

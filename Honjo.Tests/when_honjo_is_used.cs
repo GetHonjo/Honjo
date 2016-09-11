@@ -16,15 +16,15 @@ namespace Honjo.Tests
             Assert.AreEqual("300", result);
         }
 
-       // [TestMethod]
+        [TestMethod]
         public void variable_and_model_operands()
         {
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{x+Amount}}",
                 new {Amount = 100},
-                "300",1000, TimeSpan.FromSeconds(30));
+                "300",10, TimeSpan.FromSeconds(30));
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
        // [TestMethod]
         public void using_basic_types_inline()
@@ -34,7 +34,7 @@ namespace Honjo.Tests
                 new { Amount = 100 },
                 "3.141593");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace Honjo.Tests
                 new {Amount = 100},
                 "show me");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace Honjo.Tests
                 new {Amount = 100},
                 "dont");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Honjo.Tests
                 new {Amount = 100},
                 "600");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
       
@@ -80,7 +80,7 @@ namespace Honjo.Tests
                 new {Amount = 100},
                 "In the year " + DateTime.Now.Year + ", its so easy to forget everything");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace Honjo.Tests
                 new {Amount = 100},
                 "10000");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
 
@@ -104,7 +104,7 @@ namespace Honjo.Tests
                 new {},
                 @"<div style=""display:none"">Hey!I'm invinsible</div>");
 
-            testSetUp.Honjo.Test(testSetUp, true, true);
+            HanjoTestHelper.Test(testSetUp, true, true);
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace Honjo.Tests
                 new {Name = "Samuel"},
                 "Name Samuel");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace Honjo.Tests
                 new {IsGood = true},
                 "I will do");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace Honjo.Tests
                 new {IsGood = true},
                 "I will do");
 
-            testSetUp.Honjo.Test(testSetUp, true, true);
+            HanjoTestHelper.Test(testSetUp, true, true);
         }
 
 
@@ -153,7 +153,7 @@ namespace Honjo.Tests
                 new {IsGood = false},
                 "yo!");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -164,7 +164,7 @@ namespace Honjo.Tests
                 new {IsGood = false},
                 "");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -175,7 +175,7 @@ namespace Honjo.Tests
                 new {IsGood = true},
                 "I will do");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ namespace Honjo.Tests
                 new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -197,7 +197,7 @@ namespace Honjo.Tests
                 new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>a</div><div>b</div><div>w</div>");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@ namespace Honjo.Tests
                 new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>no.100:a</div><div>no.101:b</div><div>no.102:w</div>");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -219,7 +219,7 @@ namespace Honjo.Tests
                 new {},
                 "10");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -230,7 +230,7 @@ namespace Honjo.Tests
                 new {Amount = 300},
                 "500 is good");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -241,7 +241,7 @@ namespace Honjo.Tests
                 new {Amount = 300},
                 "500 is good");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -252,7 +252,7 @@ namespace Honjo.Tests
                 new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>100a</div><div>100b</div><div>100w</div>");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -265,7 +265,7 @@ namespace Honjo.Tests
                 "<div>a</div><div>b</div><div>w</div>" +
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
-            testSetUp.Honjo.Test(testSetUp);
+            HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -283,7 +283,7 @@ namespace Honjo.Tests
                 },
                 "You.Name+Name:Sam2Sam");
 
-            var result = testSetUp.Honjo.Test(testSetUp, false);
+            var result = HanjoTestHelper.Test(testSetUp, false);
         }
 
         [TestMethod]
@@ -301,7 +301,7 @@ namespace Honjo.Tests
                 },
                 "You.Amount+Amount:8");
 
-            var result = testSetUp.Honjo.Test(testSetUp);
+            var result = HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -319,7 +319,7 @@ namespace Honjo.Tests
                 },
                 "You.Amount+Amount:2");
 
-            var result = testSetUp.Honjo.Test(testSetUp);
+            var result = HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -337,7 +337,7 @@ namespace Honjo.Tests
                 },
                 "You.Amount+Amount:5");
 
-            var result = testSetUp.Honjo.Test(testSetUp);
+            var result = HanjoTestHelper.Test(testSetUp);
         }
 
         [TestMethod]
@@ -358,7 +358,7 @@ namespace Honjo.Tests
                 new {IsGood = false, IsNotGood = false},
                 "I will do");
 
-            testSetUp.Honjo.Test(testSetUp, true, true);
+            HanjoTestHelper.Test(testSetUp, true, true);
         }
 
         [TestMethod]
@@ -379,11 +379,11 @@ namespace Honjo.Tests
                 new {IsGood = false, IsNotGood = false},
                 @"I will do                     that");
 
-            testSetUp.Honjo.Test(testSetUp, true, true, true);
+            HanjoTestHelper.Test(testSetUp, true, true, true);
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
-         [TestMethod]
+        // [TestMethod]
         public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;
@@ -403,7 +403,7 @@ namespace Honjo.Tests
                     MyList = new List<string> {"a", "b", "c"}
                 }, "", totalNumberOfIteration);
 
-            testSetUp.Honjo.Test(testSetUp, false);
+            HanjoTestHelper.Test(testSetUp, false);
         }
     }
 }
