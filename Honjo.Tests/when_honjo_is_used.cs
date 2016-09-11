@@ -16,13 +16,23 @@ namespace Honjo.Tests
             Assert.AreEqual("300", result);
         }
 
-        [TestMethod]
+       // [TestMethod]
         public void variable_and_model_operands()
         {
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{x+Amount}}",
                 new {Amount = 100},
-                "300");
+                "300",1000, TimeSpan.FromSeconds(30));
+
+            testSetUp.Honjo.Test(testSetUp);
+        }
+       // [TestMethod]
+        public void using_basic_types_inline()
+        {
+            var testSetUp = new TestSetUp(
+                "{{float.Parse('3.141592654')}}",
+                new { Amount = 100 },
+                "3.141593");
 
             testSetUp.Honjo.Test(testSetUp);
         }
@@ -60,16 +70,7 @@ namespace Honjo.Tests
             testSetUp.Honjo.Test(testSetUp);
         }
 
-        [TestMethod]
-        public void using_basic_types_inline()
-        {
-            var testSetUp = new TestSetUp(
-                "{{float.Parse('3.141592654')}}",
-                new {Amount = 100},
-                "3.141593");
-
-            testSetUp.Honjo.Test(testSetUp);
-        }
+      
 
         [TestMethod]
         public void getting_dates()
@@ -382,7 +383,7 @@ namespace Honjo.Tests
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
-        // [TestMethod]
+         [TestMethod]
         public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;

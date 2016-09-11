@@ -11,8 +11,9 @@ namespace HonjoLib
     {
         public Honjo(IBladeExpressionEvaluator bladeExpressionEvaluator = null)
         {
-            BladeExpressionEvaluator = bladeExpressionEvaluator ?? new NewExpressionEvaluator();
-                // ?? new BladeExpressionEvaluator();
+            BladeExpressionEvaluator = bladeExpressionEvaluator ?? new DynamicExpressoExpressionEvaluator();
+                //?? new NewExpressionEvaluator();
+            // ?? new BladeExpressionEvaluator();
         }
 
         internal IBladeExpressionEvaluator BladeExpressionEvaluator { set; get; }
