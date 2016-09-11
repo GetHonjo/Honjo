@@ -5,14 +5,14 @@ namespace HonjoLib
 {
     public class NewExpressionEvaluator : IBladeExpressionEvaluator
     {
-        private static TypeRegistry registry = null;
+        private static TypeRegistry registry;
 
         public string Evaluate(string expression)
         {
             if (registry == null)
             {
                 registry = new TypeRegistry();
-                registry.RegisterType<DateTime>();  
+                registry.RegisterType<DateTime>();
             }
 
             var exp = new CompiledExpression(expression)

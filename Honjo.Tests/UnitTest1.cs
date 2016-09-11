@@ -4,30 +4,37 @@ using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 //http://odetocode.com/articles/80.aspx
+
 namespace Honjo.Tests
 {
     [TestClass]
     public class when_honjo_is_used
     {
+        [TestMethod]
+        public void sample_test()
+        {
+            var result = new HonjoLib.Honjo().Compile("{{var x=200}}{{x+Amount}}", new {Amount = 100});
+
+            Assert.AreEqual("300", result);
+        }
 
         [TestMethod]
         public void variable_and_model_operands()
         {
-
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{x+Amount}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "300");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void conditional_with_variable_and_model_operands1()
         {
-
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{if x>Amount}}show me{{else}}dont{{/if}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "show me");
 
             testSetUp.Honjo.Test(testSetUp);
@@ -36,10 +43,9 @@ namespace Honjo.Tests
         [TestMethod]
         public void conditional_with_variable_and_model_operands2()
         {
-
             var testSetUp = new TestSetUp(
                 "{{var x=50}}{{if x>Amount}}show me{{else}}dont{{/if}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "dont");
 
             testSetUp.Honjo.Test(testSetUp);
@@ -48,155 +54,148 @@ namespace Honjo.Tests
         [TestMethod]
         public void inline_arithmetic_operation()
         {
-
             var testSetUp = new TestSetUp(
                 "{{100+200+300}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "600");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void using_basic_types_inline()
         {
-
             var testSetUp = new TestSetUp(
                 "{{float.Parse('3.141592654')}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "3.141593");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void getting_dates()
         {
-
             var testSetUp = new TestSetUp(
                 "In the year {{DateTime.Now.Year}}, its so easy to forget everything",
-                new { Amount = 100 },
-                 "In the year " + DateTime.Now.Year.ToString() + ", its so easy to forget everything");
+                new {Amount = 100},
+                "In the year " + DateTime.Now.Year + ", its so easy to forget everything");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void use_of_inline_variables()
         {
-
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{var y=50}}{{x*y}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "10000");
 
             testSetUp.Honjo.Test(testSetUp);
         }
 
 
-
-
-
         [TestMethod]
         public void injecting_html_style_using_variable()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{var divStyle=display:none}}
                   <div style=""{{divStyle}}"">Hey!I'm invinsible</div>",
-                new { },
+                new {},
                 @"<div style=""display:none"">Hey!I'm invinsible</div>");
 
             testSetUp.Honjo.Test(testSetUp, true, true);
         }
+
         [TestMethod]
         public void basic_interpolation()
         {
-
             var testSetUp = new TestSetUp(
                 "Name {{Name}}",
-                new { Name = "Samuel" },
+                new {Name = "Samuel"},
                 "Name Samuel");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void basic_if_else_statement()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{if IsGood == true}}I will do{{else}}yo!{{/if}}",
-                new { IsGood = true },
+                new {IsGood = true},
                 "I will do");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void multiline_if_else_statement()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{if IsGood == true}}
                       I will do
                   {{else}}
                       yo!
                   {{/if}}",
-                new { IsGood = true },
+                new {IsGood = true},
                 "I will do");
 
             testSetUp.Honjo.Test(testSetUp, true, true);
         }
 
 
-
         [TestMethod]
         public void basic_if_else_statement2()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{if IsGood == true}}I will do{{else}}yo!{{/if}}",
-                new { IsGood = false },
+                new {IsGood = false},
                 "yo!");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void simple_if_statement()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{if IsGood == true}}I will do{{/if}}",
-                new { IsGood = false },
+                new {IsGood = false},
                 "");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void simple_if_statement2()
         {
-
             var testSetUp = new TestSetUp(
                 @"{{if IsGood == true}}I will do{{/if}}",
-                new { IsGood = true },
+                new {IsGood = true},
                 "I will do");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void list_of_items_with_index()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{item in MyList at index}}<div>no.{{index}}:{{item}}</div>{{/item}}",
-                new { MyList = new List<string>() { "a", "b", "w" } },
+                @"{{item in MyList at index}}<div>no.{{index}}:{{item}}</div>{{/item}}",
+                new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void list_of_items_without_index()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{item in MyList}}<div>{{item}}</div>{{/item}}",
-                new { MyList = new List<string>() { "a", "b", "w" } },
+                @"{{item in MyList}}<div>{{item}}</div>{{/item}}",
+                new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>a</div><div>b</div><div>w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
@@ -205,10 +204,9 @@ namespace Honjo.Tests
         [TestMethod]
         public void list_of_items_with_index_and_inline_variable()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{var t=100}}{{item in MyList at index}}<div>no.{{index+t}}:{{item}}</div>{{/item}}",
-                new { MyList = new List<string>() { "a", "b", "w" } },
+                @"{{var t=100}}{{item in MyList at index}}<div>no.{{index+t}}:{{item}}</div>{{/item}}",
+                new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>no.100:a</div><div>no.101:b</div><div>no.102:w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
@@ -217,10 +215,9 @@ namespace Honjo.Tests
         [TestMethod]
         public void direct_inline_templating()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{10}}",
-                new { },
+                @"{{10}}",
+                new {},
                 "10");
 
             testSetUp.Honjo.Test(testSetUp);
@@ -229,63 +226,62 @@ namespace Honjo.Tests
         [TestMethod]
         public void using_variables_and_model_as_opearnds()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{var y=Amount}}{{var x=200}}{{y+x}} is good",
-                new { Amount = 300 },
+                @"{{var y=Amount}}{{var x=200}}{{y+x}} is good",
+                new {Amount = 300},
                 "500 is good");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void using_variables_and_model_as_opearnds2()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{var x=200}}{{var y=Amount}}{{y+x}} is good",
-                new { Amount = 300 },
+                @"{{var x=200}}{{var y=Amount}}{{y+x}} is good",
+                new {Amount = 300},
                 "500 is good");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void list_of_items_with_index_and_inline_variable2()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{var t=100}}{{item in MyList}}<div>{{t}}{{item}}</div>{{/item}}",
-                new { MyList = new List<string>() { "a", "b", "w" } },
+                @"{{var t=100}}{{item in MyList}}<div>{{t}}{{item}}</div>{{/item}}",
+                new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>100a</div><div>100b</div><div>100w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void both_list_of_items_with_index_and_without_index()
         {
-
             var testSetUp = new TestSetUp(
-                 @"{{item in MyList}}<div>{{item}}</div>{{/item}}" +
-                 @"{{item in MyList at index}}<div>no.{{index}}:{{item}}</div>{{/item}}",
-                new { MyList = new List<string>() { "a", "b", "w" } },
+                @"{{item in MyList}}<div>{{item}}</div>{{/item}}" +
+                @"{{item in MyList at index}}<div>no.{{index}}:{{item}}</div>{{/item}}",
+                new {MyList = new List<string> {"a", "b", "w"}},
                 "<div>a</div><div>b</div><div>w</div>" +
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
             testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void string_concatenation_of_model_properties()
         {
-
             var testSetUp = new TestSetUp(
                 @"You.Name+Name:{{You.Name + Name}}",
-                 new
-                 {
-                     Name = "Sam",
-                     You = new
-                     {
-                         Name = "Sam2"
-                     },
-                 },
+                new
+                {
+                    Name = "Sam",
+                    You = new
+                    {
+                        Name = "Sam2"
+                    }
+                },
                 "You.Name+Name:Sam2Sam");
 
             var result = testSetUp.Honjo.Test(testSetUp, false);
@@ -294,62 +290,60 @@ namespace Honjo.Tests
         [TestMethod]
         public void model_only_operand_addition()
         {
-
             var testSetUp = new TestSetUp(
                 @"You.Amount+Amount:{{You.Amount + Amount}}",
-                 new
-                 {
-                     Amount = 3,
-                     You = new
-                     {
-                         Amount = 5
-                     },
-                 },
+                new
+                {
+                    Amount = 3,
+                    You = new
+                    {
+                        Amount = 5
+                    }
+                },
                 "You.Amount+Amount:8");
 
             var result = testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void model_only_operand_subtraction()
         {
-
             var testSetUp = new TestSetUp(
                 @"You.Amount+Amount:{{You.Amount - Amount}}",
-                 new
-                 {
-                     Amount = 3,
-                     You = new
-                     {
-                         Amount = 5
-                     },
-                 },
+                new
+                {
+                    Amount = 3,
+                    You = new
+                    {
+                        Amount = 5
+                    }
+                },
                 "You.Amount+Amount:2");
 
             var result = testSetUp.Honjo.Test(testSetUp);
         }
+
         [TestMethod]
         public void model_only_operand_division()
         {
-
             var testSetUp = new TestSetUp(
                 @"You.Amount+Amount:{{You.Amount / Amount}}",
-                 new
-                 {
-                     Amount = 2,
-                     You = new
-                     {
-                         Amount = 10
-                     },
-                 },
+                new
+                {
+                    Amount = 2,
+                    You = new
+                    {
+                        Amount = 10
+                    }
+                },
                 "You.Amount+Amount:5");
 
             var result = testSetUp.Honjo.Test(testSetUp);
         }
-        //todo FAILING TEST - UNABLE TO DO NESTED IFF
-        // [TestMethod]
-        public void nested_if_statements()
-        {
 
+        [TestMethod]
+        public void nested_if_statements_onelevel()
+        {
             var testSetUp = new TestSetUp(
                 @"
                   {{if IsGood == true}}
@@ -362,10 +356,31 @@ namespace Honjo.Tests
                      {{/if}}
                   {{/if}}
                  ",
-                new { IsGood = false, IsNotGood = false },
-                "yo!");
+                new {IsGood = false, IsNotGood = false},
+                "I will do");
 
             testSetUp.Honjo.Test(testSetUp, true, true);
+        }
+
+        [TestMethod]
+        public void nested_if_statements_onelevel2()
+        {
+            var testSetUp = new TestSetUp(
+                @"
+                  {{if IsGood == true}}
+                      I will do
+                  {{else}}
+                     {{if IsNotGood == false}}
+                         I will do
+                     {{else}}
+                         yo!
+                     {{/if}}that                       
+                  {{/if}}
+                 ",
+                new {IsGood = false, IsNotGood = false},
+                @"I will do                     that");
+
+            testSetUp.Honjo.Test(testSetUp, true, true, true);
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
@@ -374,36 +389,33 @@ namespace Honjo.Tests
         {
             var totalNumberOfIteration = 1;
             var testSetUp = new TestSetUp(
-               TestHelper.sample0 + TestHelper.sample1 + TestHelper.sample2 + TestHelper.sample3,
-                 new
-                 {
-                     Name = "Sam",
-                     Amount = 10,
-                     IsGood = true,
-                     You = new
-                     {
-                         Name = "Sam2",
-                         Amount = 3,
-                         IsGood = false,
-                     },
-                     MyList = new List<string>() { "a", "b", "c" },
-                     //MyBigList = new List<dynamic>() {  new
-                     //{
-                     //    Name = "100",
-                     //    Amount = 100,
-                     //    IsGood = false,
-                     //}, new
-                     //{
-                     //    Name = "1000",
-                     //    Amount =1000,
-                     //    IsGood = false,
-                     //} }
-                 }, "", totalNumberOfIteration);
+                TestHelper.sample0 + TestHelper.sample1 + TestHelper.sample2 + TestHelper.sample3,
+                new
+                {
+                    Name = "Sam",
+                    Amount = 10,
+                    IsGood = true,
+                    You = new
+                    {
+                        Name = "Sam2",
+                        Amount = 3,
+                        IsGood = false
+                    },
+                    MyList = new List<string> {"a", "b", "c"}
+                    //MyBigList = new List<dynamic>() {  new
+                    //{
+                    //    Name = "100",
+                    //    Amount = 100,
+                    //    IsGood = false,
+                    //}, new
+                    //{
+                    //    Name = "1000",
+                    //    Amount =1000,
+                    //    IsGood = false,
+                    //} }
+                }, "", totalNumberOfIteration);
 
             testSetUp.Honjo.Test(testSetUp, false);
         }
-
     }
-
-
 }

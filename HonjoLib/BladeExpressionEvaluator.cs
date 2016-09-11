@@ -1,3 +1,6 @@
+using Microsoft.JScript;
+using Microsoft.JScript.Vsa;
+
 namespace HonjoLib
 {
     public class BladeExpressionEvaluator : IBladeExpressionEvaluator
@@ -5,8 +8,8 @@ namespace HonjoLib
         public string Evaluate(string expression)
         {
             /*VsaEngine*/
-            var engine = Microsoft.JScript.Vsa.VsaEngine.CreateEngine();
-            var result = Microsoft.JScript.Eval.JScriptEvaluate(expression, engine);
+            var engine = VsaEngine.CreateEngine();
+            var result = Eval.JScriptEvaluate(expression, engine);
 
             return result.ToString();
         }

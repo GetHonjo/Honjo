@@ -18,9 +18,9 @@ namespace HonjoLib
 
         public static bool IsNonStringEnumerable(this Type type)
         {
-            if (type == null || type == typeof(string))
+            if (type == null || type == typeof (string))
                 return false;
-            return typeof(IEnumerable).IsAssignableFrom(type);
+            return typeof (IEnumerable).IsAssignableFrom(type);
         }
     }
 }

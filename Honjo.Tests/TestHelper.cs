@@ -2,7 +2,6 @@ namespace Honjo.Tests
 {
     public class TestHelper
     {
-       
         public static string sample0 = @"
                         Name {{Name}} 
                         Amount : {{Amount}} 
@@ -61,7 +60,5 @@ namespace Honjo.Tests
 
 
         public static string sample4 = " You.Name + Name: {{You.Name + Name}} ";
-       
-
     }
 }
