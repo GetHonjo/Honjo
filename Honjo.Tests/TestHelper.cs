@@ -48,12 +48,7 @@ namespace Honjo.Tests
 {{/if}}
 ";
         public static string sample2 = @"{{item in MyList at index}} <div>no.{{index}} : {{item}}</div> {{/item}}";
-        public static string sample3 = @"{{item 
-                           in 
-                           MyList 
-                           at 
-                           index
-                        }} 
+        public static string sample3 = @"{{item in MyList at index                      }} 
 
                                  <div>no.{{index}} : {{item}}</div> 
                          {{/item}}";

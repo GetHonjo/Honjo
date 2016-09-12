@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>The HTML5 Herald</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+</head>
+
+<body>
+Name {{Name}} <br />
+    Amount : {{Amount}}<br />
+    IsGood : {{IsGood}}<br />
+
+    You.Name : {{You.Name}}<br />
+    You.Amount : {{You.Amount}}<br />
+    You.IsGood : {{You.IsGood}}<br /><br />
+
+    Amount + Amount : {{Amount+Amount}}<br />
+    Amount - You.Amount : {{Amount - You.Amount}}<br />
+    You.Amount - Amount : {{You.Amount - Amount}}<br />
+    You.Name + Name: {{You.Name + Name}}<br />
+    <br />
+    
+    {{if IsGood == true}}
+    I will do
+    {{else}}
+    yo!
+    {{/if}}
+    <br /><br />
+    {{if You.IsGood == true}}
+    I will do
+    {{else}}
+    yo!
+    {{/if}}
+    <br /><br />
+    {{if You.Amount > Amount}}
+    I will do
+    {{else}}
+    yo!
+    {{/if}}
+    <br /><br />
+    {{if You.Amount < Amount}}
+    I will do
+    {{else}}
+    yo!
+    {{/if}}
+    <br /><br />
+    {{if You.Amount < Amount}}
+    I will do
+    {{else}}
+    yo!
+{{/if}}
+    
+    <br /><br />
+{{item in MyList at index}} <div>no.{{index}} : {{item}}</div> {{/item}}
+    
+You.Name + Name: {{You.Name + Name}}
+    <br /><br />
+    {{item in  MyList at index}}
+       <div>no.{{index}} : {{item}}</div>
+    {{/item}}
+<script src="js/scripts.js"></script>
+</body>
+</html>

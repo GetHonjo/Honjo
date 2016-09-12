@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Helpers;
 using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -425,13 +426,19 @@ namespace Honjo.Tests
 
             HanjoTestHelper.Test(testSetUp);
         }
-        //TODO THIS TEST SEEM TO NEVER RETURN
-       // [TestMethod]
+       
+        [TestMethod]
         public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;
-            var testSetUp = new TestSetUp(
-                TestHelper.sample0 + TestHelper.sample1 + TestHelper.sample2 + TestHelper.sample3,
+          var template=  System.IO.File.ReadAllText("template.html");
+
+            foreach (var i in Enumerable.Range(1,1))
+            {
+                template += template;
+            }
+
+            var testSetUp = new TestSetUp(template,
                 new
                 {
                     Name = "Sam",
@@ -446,7 +453,35 @@ namespace Honjo.Tests
                     MyList = new List<string> {"a", "b", "c"}
                 }, "", totalNumberOfIteration);
 
-            HanjoTestHelper.Test(testSetUp, false);
+          var t=  HanjoTestHelper.Test(testSetUp, false);
+        }
+
+        [TestMethod]
+        public void LoadTest_sample_using_jsonmodel()
+        {
+            var totalNumberOfIteration = 1;
+            var template = System.IO.File.ReadAllText("template.html");
+            var json = JsonConvert.SerializeObject(new
+            {
+                Name = "Sam",
+                Amount = 10,
+                IsGood = true,
+                You = new
+                {
+                    Name = "Sam2",
+                    Amount = 3,
+                    IsGood = false
+                },
+                MyList = new List<string> {"a", "b", "c"}
+            });
+            foreach (var i in Enumerable.Range(1, 1))
+            {
+                template += template;
+            }
+
+            var testSetUp = new TestSetUp(template, json, "", totalNumberOfIteration);
+
+            var t = HanjoTestHelper.Test(testSetUp, false);
         }
     }
 }
