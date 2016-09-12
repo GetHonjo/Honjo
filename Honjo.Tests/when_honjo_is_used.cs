@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Helpers;
 using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Honjo.Tests
 {
@@ -12,6 +15,15 @@ namespace Honjo.Tests
         public void sample_test()
         {
             var result = new HonjoLib.Honjo().Compile("{{var x=200}}{{x+Amount}}", new {Amount = 100});
+
+            Assert.AreEqual("300", result);
+        }
+
+        [TestMethod]
+        public void sample_test2()
+        {
+      
+            var result = new HonjoLib.Honjo().Compile("{{var x=200}}{{x+Amount}}", "{\"Amount\":100}");
 
             Assert.AreEqual("300", result);
         }
@@ -380,6 +392,26 @@ namespace Honjo.Tests
                 @"I will do                     that");
 
             HanjoTestHelper.Test(testSetUp, true, true, true);
+        }
+        [TestMethod]
+        public void nested_if_statements_onelevel_passin_json()
+        {
+            var json = JsonConvert.SerializeObject(new {IsGood = false, IsNotGood = false});
+          
+            var testSetUp = new TestSetUp(
+                @"
+                  {{if IsGood == true}}
+                      I will do
+                  {{else}}
+                     {{if IsNotGood == false}}
+                         I will do
+                     {{else}}
+                         yo!
+                     {{/if}}that                       
+                  {{/if}}
+                 ", json, @"");
+
+            HanjoTestHelper.Test(testSetUp, false);
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN

@@ -1,12 +1,84 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web.Helpers;
+
 
 namespace HonjoLib
 {
+    internal static class TypeToDictionaryExtention
+    {
+
+        internal static Dictionary<string, Tuple<dynamic, Type>> ToDictionary<T>( this  T o, string root = "")
+        {
+            if (o == null)
+            {
+                return new Dictionary<string, Tuple<dynamic, Type>>();
+            }
+
+            var dic = new Dictionary<string, Tuple<dynamic, Type>>();
+
+            var properties = o.GetType() .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.Default);
+
+            object myVar = o;
+            if (o is string && properties.Any())
+            {
+                myVar = Json.Decode<dynamic>(o.ToString());
+
+                var tttt = myVar as Dictionary<string, object>;
+
+
+                foreach (var prop in tttt)
+                {
+                    dic.Add(prop.Key, new Tuple<dynamic, Type>(prop.Value, typeof (object)));
+                }
+            }
+            else
+            {
+                foreach (var prop in properties)
+                {
+                    if (
+                        prop.PropertyType == typeof(bool))
+                    {
+                        var data = prop.GetValue(myVar, null);
+                        dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data.ToString().ToLower(), prop.PropertyType));
+                    }
+                    else if (typeof(IEnumerable).IsAssignableFrom(prop.PropertyType) &&
+                             myVar.GetType().IsNonStringEnumerable())
+                    {
+                        dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
+                    }
+                    else if (prop.PropertyType == typeof(string)
+                             || prop.PropertyType == typeof(int))
+                    {
+                        var data = prop.GetValue(myVar, null);
+                        dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data, prop.PropertyType));
+                    }
+                    else if (prop.PropertyType == typeof(char))
+                    {
+                        dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
+                    }
+                    else
+                    {
+                        var result = ToDictionary(prop.GetValue(myVar, null), root + prop.Name + ".");
+                        if (result == null) continue;
+                        foreach (var keyValuePair in result)
+                        {
+                            dic.Add(keyValuePair.Key, keyValuePair.Value);
+                        }
+                    }
+                }
+            }
+            return dic;
+        }
+
+    }
+
+
     public class MatchEvaluators
     {
         internal static Regex IterationRegex = new Regex(@"\{{item(.*?) in (.*?)}}(.*?)\{{/item}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
@@ -51,7 +123,7 @@ namespace HonjoLib
                                 {
                                     {"SomeScope", new Tuple<dynamic, Type>(o1, typeof (string))}
                                 }
-                                : ToDictionary(new
+                                : TypeToDictionaryExtention. ToDictionary(new
                                 {
                                     Scope = o1
                                 });
@@ -221,50 +293,6 @@ namespace HonjoLib
         internal MatchEvaluator MatchNestedIfElseRegexEvaluator { set; get; }
         internal MatchEvaluator VariableCreationRegexEvaluator { set; get; }
         internal MatchEvaluator IterationRegexEvaluator { set; get; }
-        internal static Dictionary<string, Tuple<dynamic, Type>> ToDictionary<T>(T myVar, string root = "")
-        {
-            if (myVar == null)
-            {
-                return new Dictionary<string, Tuple<dynamic, Type>>();
-            }
-
-            var dic = new Dictionary<string, Tuple<dynamic, Type>>();
-
-            foreach (var prop in myVar.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
-            {
-                if (
-                    prop.PropertyType == typeof(bool))
-                {
-                    var data = prop.GetValue(myVar, null);
-                    dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data.ToString().ToLower(), prop.PropertyType));
-                }
-                else if (typeof(IEnumerable).IsAssignableFrom(prop.PropertyType) &&
-                         myVar.GetType().IsNonStringEnumerable())
-                {
-                    dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
-                }
-                else if (prop.PropertyType == typeof(string)
-                         || prop.PropertyType == typeof(int))
-                {
-                    var data = prop.GetValue(myVar, null);
-                    dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data, prop.PropertyType));
-                }
-                else if (prop.PropertyType == typeof(char))
-                {
-                    dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
-                }
-                else
-                {
-                    var result = ToDictionary(prop.GetValue(myVar, null), root + prop.Name + ".");
-                    if (result == null) continue;
-                    foreach (var keyValuePair in result)
-                    {
-                        dic.Add(keyValuePair.Key, keyValuePair.Value);
-                    }
-                }
-            }
-            return dic;
-        }
-
+      
     }
 }

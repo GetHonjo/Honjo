@@ -1,31 +1,34 @@
-﻿namespace HonjoLib
+﻿using System.Web.Helpers;
+
+namespace HonjoLib
 {
     public class Honjo
     {
         public Honjo(IBladeExpressionEvaluator bladeExpressionEvaluator = null)
         {
-            BladeExpressionEvaluator = bladeExpressionEvaluator 
-                ?? new DynamicExpressoExpressionEvaluator();
+            BladeExpressionEvaluator = bladeExpressionEvaluator
+                ?? new NewExpressionEvaluator();
             //?? new NewExpressionEvaluator();
             // ?? new BladeExpressionEvaluator();
         }
 
         internal IBladeExpressionEvaluator BladeExpressionEvaluator { set; get; }
 
-      
+
 
         private MatchEvaluators MatchEvaluators { set; get; }
 
         public string Compile(string s, object o, bool trimEveryResult = false)
         {
-            var dic = MatchEvaluators.ToDictionary(o);
 
-            MatchEvaluators=  new MatchEvaluators(dic, o, trimEveryResult,BladeExpressionEvaluator);
+         
+            var dic = TypeToDictionaryExtention.ToDictionary(o);
+            MatchEvaluators = new MatchEvaluators(dic, o, trimEveryResult, BladeExpressionEvaluator);
 
             var hasUpdate = false;
             do
             {
-                hasUpdate = MatchEvaluators. IterationRegex.Match(s).Success;
+                hasUpdate = MatchEvaluators.IterationRegex.Match(s).Success;
                 if (hasUpdate)
                 {
                     s = MatchEvaluators.IterationRegex.Replace(s, MatchEvaluators.IterationRegexEvaluator);

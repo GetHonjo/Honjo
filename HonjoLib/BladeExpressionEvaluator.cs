@@ -7,6 +7,7 @@ namespace HonjoLib
     {
         public string Evaluate(string expression)
         {
+
             /*VsaEngine*/
             var engine = VsaEngine.CreateEngine();
             var result = Eval.JScriptEvaluate(expression, engine);
