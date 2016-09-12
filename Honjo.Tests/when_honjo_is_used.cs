@@ -200,7 +200,7 @@ namespace Honjo.Tests
 
             HanjoTestHelper.Test(testSetUp);
         }
-
+       
         [TestMethod]
         public void list_of_items_without_index()
         {
@@ -415,7 +415,18 @@ namespace Honjo.Tests
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
-        // [TestMethod]
+       // [TestMethod]
+        public void list_of_items_with_index2()
+        {
+            var testSetUp = new TestSetUp(
+                @"{{item in MyList at index}}<div>no.{{index}}:{{item.Name}}</div>{{/item}}",
+                new { MyList = new List<dynamic> { new { Name = "a" }, new { Name = "b" }, new { Name = "w" } } },
+                "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
+
+            HanjoTestHelper.Test(testSetUp);
+        }
+        //TODO THIS TEST SEEM TO NEVER RETURN
+       // [TestMethod]
         public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;
