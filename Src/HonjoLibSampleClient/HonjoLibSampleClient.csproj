@@ -42,7 +42,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="HonjoLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Honjo.0.0.4-pre\lib\HonjoLib.dll</HintPath>
+      <HintPath>..\packages\Honjo.0.1.0\lib\HonjoLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

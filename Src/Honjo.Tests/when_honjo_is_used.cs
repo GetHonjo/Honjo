@@ -8,14 +8,6 @@ using Newtonsoft.Json;
 
 namespace Honjo.Tests
 {
-    public class MyClass
-    {
-        public static int DoSomething(int i)
-        {
-            return i + 1000;
-        }
-    }
-
     [TestClass]
     public class when_honjo_is_used
     {
@@ -24,9 +16,9 @@ namespace Honjo.Tests
         [TestMethod]
         public void sample_regTypes()
         {
-            var result = new HonjoLib.Honjo(typeof(MyClass)).Compile("{{var x=200}}{{MyClass.DoSomething(x+Amount)}}", new { Amount = 100 });
+            var result = new HonjoLib.Honjo(typeof(MyClass)).Compile("{{var x=200}}{{MyClass.Tripple(x+Amount)}}", new { Amount = 100 });
 
-            Assert.AreEqual("1300", result);
+            Assert.AreEqual("900", result);
         }
 
         [TestMethod]
