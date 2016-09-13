@@ -7,6 +7,6 @@ This lib is not fully ready for use at the moment. Stay tuned
 
 Checkout The Samples 
 
-https://github.com/GetHonjo/Honjo/tree/master/LINQPAD
+https://github.com/GetHonjo/Honjo/tree/master/Samples
 
 https://github.com/GetHonjo/Honjo/blob/master/Src/Honjo.Tests/when_honjo_is_used.cs
