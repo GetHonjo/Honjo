@@ -21,6 +21,8 @@ namespace Honjo.Tests
             Assert.AreEqual("900", result);
         }
 
+     
+
         [TestMethod]
         public void sample_test3()
         {
@@ -472,7 +474,16 @@ namespace Honjo.Tests
             var t = HanjoTestHelper.Test(testSetUp, false);
         }
 
-       // [TestMethod]
+        // [TestMethod]
+        //tdo fix this api
+        public void sample_regTypes2()
+        {
+            var result = new HonjoLib.Honjo(false, new Tuple<string, Type>("handler", typeof(MyClass))).Compile("{{var x=200}}{{handler.Tripple(x+Amount)}}", new { Amount = 100 });
+
+            Assert.AreEqual("900", result);
+        }
+
+        // [TestMethod]
         public void LoadTest_sample_using_jsonmodel()
         {
             var totalNumberOfIteration = 1;
