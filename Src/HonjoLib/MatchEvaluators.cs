@@ -1,19 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web.Helpers;
 
-
 namespace HonjoLib
 {
     internal static class TypeToDictionaryExtention
     {
-
-        internal static Dictionary<string, Tuple<dynamic, Type>> ToDictionary<T>( this  T o, string root = "")
+        internal static Dictionary<string, Tuple<dynamic, Type>> ToDictionary<T>(this T o, string root = "")
         {
             if (o == null)
             {
@@ -22,7 +19,10 @@ namespace HonjoLib
 
             var dic = new Dictionary<string, Tuple<dynamic, Type>>();
 
-            var properties = o.GetType() .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.Default);
+            var properties =
+                o.GetType()
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static |
+                                   BindingFlags.Default);
 
             object myVar = o;
             if (o is string && properties.Any())
@@ -42,23 +42,23 @@ namespace HonjoLib
                 foreach (var prop in properties)
                 {
                     if (
-                        prop.PropertyType == typeof(bool))
+                        prop.PropertyType == typeof (bool))
                     {
                         var data = prop.GetValue(myVar, null);
                         dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data.ToString().ToLower(), prop.PropertyType));
                     }
-                    else if (typeof(IEnumerable).IsAssignableFrom(prop.PropertyType) &&
+                    else if (typeof (IEnumerable).IsAssignableFrom(prop.PropertyType) &&
                              myVar.GetType().IsNonStringEnumerable())
                     {
                         dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
                     }
-                    else if (prop.PropertyType == typeof(string)
-                             || prop.PropertyType == typeof(int))
+                    else if (prop.PropertyType == typeof (string)
+                             || prop.PropertyType == typeof (int))
                     {
                         var data = prop.GetValue(myVar, null);
                         dic.Add(root + prop.Name, new Tuple<dynamic, Type>(data, prop.PropertyType));
                     }
-                    else if (prop.PropertyType == typeof(char))
+                    else if (prop.PropertyType == typeof (char))
                     {
                         dic.Add(root + prop.Name, new Tuple<dynamic, Type>(myVar, prop.PropertyType));
                     }
@@ -75,25 +75,36 @@ namespace HonjoLib
             }
             return dic;
         }
-
     }
 
 
     public class MatchEvaluators
     {
-        internal static Regex IterationRegex = new Regex(@"\{{item(.*?) in (.*?)}}(.*?)\{{/item}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        internal static Regex VariableCreationRegex = new Regex(@"\{{var (.*?)=(.*?)\}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        internal static Regex MatchIfElseRegex = new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?){{else}}(.*?)\{{/if}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        internal static Regex MatchIfRegex = new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?)\{{/if}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        internal static Regex MatchNestedIfElseRegex = new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?){{else}}(.*?)\{{/if}}(.*?){{/if}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        internal static Regex InterpolRegex = new Regex(@"\{{(.*?)\}}", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        internal static Regex IterationRegex = new Regex(@"\{{item(.*?) in (.*?)}}(.*?)\{{/item}}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+        internal static Regex VariableCreationRegex = new Regex(@"\{{var (.*?)=(.*?)\}}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+        internal static Regex MatchIfElseRegex =
+            new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?){{else}}(.*?)\{{/if}}",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+        internal static Regex MatchIfRegex = new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?)\{{/if}}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+        internal static Regex MatchNestedIfElseRegex =
+            new Regex(@"\{{if (.*?)(==|>|<|>=|<=|!=|&&)(.*?)}}(.*?){{else}}(.*?)\{{/if}}(.*?){{/if}}",
+                RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+        internal static Regex InterpolRegex = new Regex(@"\{{(.*?)\}}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
 
-        public MatchEvaluators(Dictionary<string, Tuple<dynamic, Type>> dic, object o, bool trimEveryResult, IBladeExpressionEvaluator bladeExpressionEvaluator)
+        public MatchEvaluators(Dictionary<string, Tuple<dynamic, Type>> dic, object o, bool trimEveryResult, IBladeExpressionEvaluator bladeExpressionEvaluator, List<Type> types, List<Tuple<string, Type>> namedTypes, bool useNamedTypeAsCamelCase)
         {
             IterationRegexEvaluator = m =>
             {
-
                 var codeString1 = "item"; // m.Groups[1].Value.Trim();
 
 
@@ -123,17 +134,17 @@ namespace HonjoLib
                                 {
                                     {"SomeScope", new Tuple<dynamic, Type>(o1, typeof (string))}
                                 }
-                                : TypeToDictionaryExtention. ToDictionary(new
+                                : new
                                 {
                                     Scope = o1
-                                });
+                                }.ToDictionary();
 
                             foreach (var keyValuePair in tmpDic)
                             {
                                 var scope = Guid.NewGuid().ToString().Replace("-", "");
                                 var itemRef = scope + "." + codeString1 + "_" + i;
                                 dic.Add(itemRef,
-                                    new Tuple<dynamic, Type>(keyValuePair.Value.Item1, typeof(string)));
+                                    new Tuple<dynamic, Type>(keyValuePair.Value.Item1, typeof (string)));
                                 newBuild +=
                                     (codeString3 == null
                                         ? codeString4
@@ -164,7 +175,7 @@ namespace HonjoLib
                 Tuple<dynamic, Type> val;
                 if (int.TryParse(value, out j))
                 {
-                    val = new Tuple<dynamic, Type>(j, typeof(int));
+                    val = new Tuple<dynamic, Type>(j, typeof (int));
                 }
 
                 else
@@ -175,7 +186,7 @@ namespace HonjoLib
                     }
                     else
                     {
-                        val = new Tuple<dynamic, Type>(value, typeof(string));
+                        val = new Tuple<dynamic, Type>(value, typeof (string));
                     }
                 }
 
@@ -249,13 +260,47 @@ namespace HonjoLib
                 var codeString = m.Groups[1].Value.Trim();
                 tmpResult = codeString;
 
+                var isArg = false;
+                var methodName = "";
+
+                var parenthesisRegex = new Regex(@"\((.*?)\)");
+                var ifRegex = new Regex(@"\((.*?)\)\?");
+                var match= parenthesisRegex.Match(codeString);
+                var matchIf = ifRegex.Match(codeString);
+                /*
+                  parenthesisRegex.Replace(codeString, mm =>
+                    {
+                        var res= new Honjo(useNamedTypeAsCamelCase , types,namedTypes.ToArray()).Compile(mm.Groups[1].Value,o);
+
+                        return res;
+                    });
+
+                 */
+
+                if (match.Success )
+                {
+                    var split = codeString.Split('(');
+                    methodName = split[0];
+                    if (!string.IsNullOrEmpty(methodName) || !matchIf.Success)
+                    {
+                        isArg = true;
+                        codeString = split[1].Split(')')[0];
+                        tmpResult = codeString;
+                    }
+                    
+                }
+
                 if (dic.ContainsKey(codeString))
                 {
                     tmpResult = dic[codeString].Item1.ToString();
+                    if (isArg)
+                    {
+                        tmpResult = methodName + "(" + tmpResult + ")";
+                    }
                 }
                 else
                 {
-                    foreach (var c in new List<char> { '+', '-', '/', '|', '*' })
+                    foreach (var c in new List<char> {'+', '-', '/', '|', '*'})
                     {
                         foreach (var s1 in tmpResult.Split(c).ToList().OrderByDescending(ss => ss.Split('.').Length)
                             )
@@ -264,8 +309,9 @@ namespace HonjoLib
                             {
                                 var avail = dic[s1.ToString().Trim()];
                                 var replacement = avail.Item1.ToString();
-                                var rep = avail.Item2 == typeof(string) ? "'" + replacement + "'" : replacement;
+                                var rep = avail.Item2 == typeof (string) ? "'" + replacement + "'" : replacement;
                                 codeString = codeString.Replace(s1.Trim(), rep);
+                                
                             }
                         }
                     }
@@ -273,7 +319,11 @@ namespace HonjoLib
 
                     try
                     {
-                        tmpResult = bladeExpressionEvaluator.Evaluate(codeString);
+                        if (isArg)
+                        {
+                            codeString = methodName + "(" + codeString + ")";
+                        }
+                        tmpResult = bladeExpressionEvaluator.Evaluate(codeString, types, namedTypes);
                     }
                     catch (Exception te)
                     {
@@ -293,6 +343,5 @@ namespace HonjoLib
         internal MatchEvaluator MatchNestedIfElseRegexEvaluator { set; get; }
         internal MatchEvaluator VariableCreationRegexEvaluator { set; get; }
         internal MatchEvaluator IterationRegexEvaluator { set; get; }
-      
     }
 }

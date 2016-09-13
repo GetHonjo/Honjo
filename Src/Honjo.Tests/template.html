@@ -11,58 +11,59 @@
 </head>
 
 <body>
-Name {{Name}} <br />
-    Amount : {{Amount}}<br />
-    IsGood : {{IsGood}}<br />
+Name {{Name}} <br/>
+Amount : {{Amount}}<br/>
+IsGood : {{IsGood}}<br/>
 
-    You.Name : {{You.Name}}<br />
-    You.Amount : {{You.Amount}}<br />
-    You.IsGood : {{You.IsGood}}<br /><br />
+You.Name : {{You.Name}}<br/>
+You.Amount : {{You.Amount}}<br/>
+You.IsGood : {{You.IsGood}}<br/><br/>
 
-    Amount + Amount : {{Amount+Amount}}<br />
-    Amount - You.Amount : {{Amount - You.Amount}}<br />
-    You.Amount - Amount : {{You.Amount - Amount}}<br />
-    You.Name + Name: {{You.Name + Name}}<br />
-    <br />
-    
-    {{if IsGood == true}}
-    I will do
-    {{else}}
-    yo!
-    {{/if}}
-    <br /><br />
-    {{if You.IsGood == true}}
-    I will do
-    {{else}}
-    yo!
-    {{/if}}
-    <br /><br />
-    {{if You.Amount > Amount}}
-    I will do
-    {{else}}
-    yo!
-    {{/if}}
-    <br /><br />
-    {{if You.Amount < Amount}}
-    I will do
-    {{else}}
-    yo!
-    {{/if}}
-    <br /><br />
-    {{if You.Amount < Amount}}
-    I will do
-    {{else}}
-    yo!
+Amount + Amount : {{Amount+Amount}}<br/>
+Amount - You.Amount : {{Amount - You.Amount}}<br/>
+You.Amount - Amount : {{You.Amount - Amount}}<br/>
+You.Name + Name: {{You.Name + Name}}<br/>
+<br/>
+
+{{if IsGood == true}}
+I will do
+{{else}}
+yo!
 {{/if}}
-    
-    <br /><br />
-{{item in MyList at index}} <div>no.{{index}} : {{item}}</div> {{/item}}
-    
+<br/><br/>
+{{if You.IsGood == true}}
+I will do
+{{else}}
+yo!
+{{/if}}
+<br/><br/>
+{{if You.Amount > Amount}}
+I will do
+{{else}}
+yo!
+{{/if}}
+<br/><br/>
+{{if You.Amount < Amount}}
+I will do
+{{else}}
+yo!
+{{/if}}
+<br/><br/>
+{{if You.Amount < Amount}}
+I will do
+{{else}}
+yo!
+{{/if}}
+
+<br/><br/>
+{{item in MyList at index}}
+<div>no.{{index}} : {{item}}</div> {{/item}}
+
 You.Name + Name: {{You.Name + Name}}
-    <br /><br />
-    {{item in  MyList at index}}
-       <div>no.{{index}} : {{item}}</div>
-    {{/item}}
+<br/><br/>
+{{item in MyList at index}}
+<div>no.{{index}} : {{item}}</div>
+{{/item}}
 <script src="js/scripts.js"></script>
 </body>
 </html>

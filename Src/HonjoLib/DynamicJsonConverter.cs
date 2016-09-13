@@ -11,22 +11,23 @@ namespace HonjoLib
 {
     public sealed class DynamicJsonConverter : JavaScriptConverter
     {
-        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+        public override IEnumerable<Type> SupportedTypes
+        {
+            get { return new ReadOnlyCollection<Type>(new List<Type>(new[] {typeof (object)})); }
+        }
+
+        public override object Deserialize(IDictionary<string, object> dictionary, Type type,
+            JavaScriptSerializer serializer)
         {
             if (dictionary == null)
                 throw new ArgumentNullException("dictionary");
 
-            return type == typeof(object) ? new DynamicJsonObject(dictionary) : null;
+            return type == typeof (object) ? new DynamicJsonObject(dictionary) : null;
         }
 
         public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
         {
             throw new NotImplementedException();
-        }
-
-        public override IEnumerable<Type> SupportedTypes
-        {
-            get { return new ReadOnlyCollection<Type>(new List<Type>(new[] { typeof(object) })); }
         }
 
         #region Nested type: DynamicJsonObject
@@ -65,24 +66,23 @@ namespace HonjoLib
                     }
                     else if (value is IDictionary<string, object>)
                     {
-                        new DynamicJsonObject((IDictionary<string, object>)value).ToString(sb);
+                        new DynamicJsonObject((IDictionary<string, object>) value).ToString(sb);
                     }
                     else if (value is ArrayList)
                     {
                         sb.Append(name + ":[");
                         var firstInArray = true;
-                        foreach (var arrayValue in (ArrayList)value)
+                        foreach (var arrayValue in (ArrayList) value)
                         {
                             if (!firstInArray)
                                 sb.Append(",");
                             firstInArray = false;
                             if (arrayValue is IDictionary<string, object>)
-                                new DynamicJsonObject((IDictionary<string, object>)arrayValue).ToString(sb);
+                                new DynamicJsonObject((IDictionary<string, object>) arrayValue).ToString(sb);
                             else if (arrayValue is string)
                                 sb.AppendFormat("\"{0}\"", arrayValue);
                             else
                                 sb.AppendFormat("{0}", arrayValue);
-
                         }
                         sb.Append("]");
                     }
@@ -135,7 +135,8 @@ namespace HonjoLib
                 if (arrayList != null && arrayList.Count > 0)
                 {
                     return arrayList[0] is IDictionary<string, object>
-                        ? new List<object>(arrayList.Cast<IDictionary<string, object>>().Select(x => new DynamicJsonObject(x)))
+                        ? new List<object>(
+                            arrayList.Cast<IDictionary<string, object>>().Select(x => new DynamicJsonObject(x)))
                         : new List<object>(arrayList.Cast<object>());
                 }
 

@@ -5,7 +5,8 @@ namespace HonjoLib
 {
     public class HanjoTestHelper
     {
-        public static string Test(TestSetUp testSetUp, bool assertExpectations = true, bool trimResultBeforeAssertion = false,bool trimEveryResult = false)
+        public static string Test(TestSetUp testSetUp, bool assertExpectations = true,
+            bool trimResultBeforeAssertion = false, bool trimEveryResult = false)
         {
             Console.WriteLine("-===============INPUT============-");
             Console.WriteLine(testSetUp.Template);
@@ -20,7 +21,8 @@ namespace HonjoLib
             if (trimResultBeforeAssertion)
             {
                 Console.WriteLine("-===============RESULT HAS BEEN TRIMED============-");
-                testSetUp.ActualResult = Regex.Replace(testSetUp.ActualResult.Trim(),@"[\u000A\u000B\u000C\u000D\u2028\u2029\u0085]+", string.Empty, RegexOptions.Compiled);
+                testSetUp.ActualResult = Regex.Replace(testSetUp.ActualResult.Trim(),
+                    @"[\u000A\u000B\u000C\u000D\u2028\u2029\u0085]+", string.Empty, RegexOptions.Compiled);
             }
             else
             {
@@ -48,6 +50,5 @@ namespace HonjoLib
 
             return testSetUp.ActualResult;
         }
-
     }
 }

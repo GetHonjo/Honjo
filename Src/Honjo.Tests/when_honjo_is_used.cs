@@ -1,17 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Web.Helpers;
 using HonjoLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Honjo.Tests
 {
+    public class MyClass
+    {
+        public static int DoSomething(int i)
+        {
+            return i + 1000;
+        }
+    }
+
     [TestClass]
     public class when_honjo_is_used
     {
+
+
+        [TestMethod]
+        public void sample_regTypes()
+        {
+            var result = new HonjoLib.Honjo(typeof(MyClass)).Compile("{{var x=200}}{{MyClass.DoSomething(x+Amount)}}", new { Amount = 100 });
+
+            Assert.AreEqual("1300", result);
+        }
+
+        [TestMethod]
+        public void sample_test3()
+        {
+            var result = new HonjoLib.Honjo().Compile("{{var x=200}}{{(x+Amount)}}", new { Amount = 100 });
+
+            Assert.AreEqual("300", result);
+        }
         [TestMethod]
         public void sample_test()
         {
@@ -23,7 +47,6 @@ namespace Honjo.Tests
         [TestMethod]
         public void sample_test2()
         {
-      
             var result = new HonjoLib.Honjo().Compile("{{var x=200}}{{x+Amount}}", "{\"Amount\":100}");
 
             Assert.AreEqual("300", result);
@@ -35,16 +58,17 @@ namespace Honjo.Tests
             var testSetUp = new TestSetUp(
                 "{{var x=200}}{{x+Amount}}",
                 new {Amount = 100},
-                "300",10, TimeSpan.FromSeconds(30));
+                "300", 10, TimeSpan.FromSeconds(30));
 
             HanjoTestHelper.Test(testSetUp);
         }
-       // [TestMethod]
+
+        // [TestMethod]
         public void using_basic_types_inline()
         {
             var testSetUp = new TestSetUp(
                 "{{float.Parse('3.141592654')}}",
-                new { Amount = 100 },
+                new {Amount = 100},
                 "3.141593");
 
             HanjoTestHelper.Test(testSetUp);
@@ -83,7 +107,6 @@ namespace Honjo.Tests
             HanjoTestHelper.Test(testSetUp);
         }
 
-      
 
         [TestMethod]
         public void getting_dates()
@@ -201,7 +224,7 @@ namespace Honjo.Tests
 
             HanjoTestHelper.Test(testSetUp);
         }
-       
+
         [TestMethod]
         public void list_of_items_without_index()
         {
@@ -394,11 +417,12 @@ namespace Honjo.Tests
 
             HanjoTestHelper.Test(testSetUp, true, true, true);
         }
+
         [TestMethod]
         public void nested_if_statements_onelevel_passin_json()
         {
             var json = JsonConvert.SerializeObject(new {IsGood = false, IsNotGood = false});
-          
+
             var testSetUp = new TestSetUp(
                 @"
                   {{if IsGood == true}}
@@ -416,24 +440,24 @@ namespace Honjo.Tests
         }
 
         //TODO THIS TEST SEEM TO NEVER RETURN
-       // [TestMethod]
+        // [TestMethod]
         public void list_of_items_with_index2()
         {
             var testSetUp = new TestSetUp(
                 @"{{item in MyList at index}}<div>no.{{index}}:{{item.Name}}</div>{{/item}}",
-                new { MyList = new List<dynamic> { new { Name = "a" }, new { Name = "b" }, new { Name = "w" } } },
+                new {MyList = new List<dynamic> {new {Name = "a"}, new {Name = "b"}, new {Name = "w"}}},
                 "<div>no.0:a</div><div>no.1:b</div><div>no.2:w</div>");
 
             HanjoTestHelper.Test(testSetUp);
         }
-       
+
         [TestMethod]
         public void LoadTest_sample()
         {
             var totalNumberOfIteration = 1;
-          var template=  System.IO.File.ReadAllText("template.html");
+            var template = File.ReadAllText("template.html");
 
-            foreach (var i in Enumerable.Range(1,1))
+            foreach (var i in Enumerable.Range(1, 1))
             {
                 template += template;
             }
@@ -453,14 +477,14 @@ namespace Honjo.Tests
                     MyList = new List<string> {"a", "b", "c"}
                 }, "", totalNumberOfIteration);
 
-          var t=  HanjoTestHelper.Test(testSetUp, false);
+            var t = HanjoTestHelper.Test(testSetUp, false);
         }
 
-        [TestMethod]
+       // [TestMethod]
         public void LoadTest_sample_using_jsonmodel()
         {
             var totalNumberOfIteration = 1;
-            var template = System.IO.File.ReadAllText("template.html");
+            var template = File.ReadAllText("template.html");
             var json = JsonConvert.SerializeObject(new
             {
                 Name = "Sam",
