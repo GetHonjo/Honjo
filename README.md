@@ -5,4 +5,11 @@ This lib is not fully ready for use at the moment. Stay tuned
 [![NuGet version](https://img.shields.io/nuget/v/Honjo.svg?style=flat-square)](https://www.nuget.org/packages/Honjo/0.0.4-pre)
 
 
-Checkout some samples here https://github.com/GetHonjo/Honjo/blob/master/Honjo.Tests/when_honjo_is_used.cs
+Checkout The Samples 
+
+https://github.com/GetHonjo/Honjo/tree/master/LINQPAD
+
+https://github.com/GetHonjo/Honjo/blob/master/Honjo.Tests/when_honjo_is_used.cs
+
+
+https://github.com/GetHonjo/Honjo/blob/master/Src/Honjo.Tests/when_honjo_is_used.cs
