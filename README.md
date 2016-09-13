@@ -9,7 +9,4 @@ Checkout The Samples
 
 https://github.com/GetHonjo/Honjo/tree/master/LINQPAD
 
-https://github.com/GetHonjo/Honjo/blob/master/Honjo.Tests/when_honjo_is_used.cs
-
-
 https://github.com/GetHonjo/Honjo/blob/master/Src/Honjo.Tests/when_honjo_is_used.cs
