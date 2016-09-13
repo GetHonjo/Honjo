@@ -3,7 +3,11 @@
   <Namespace>HonjoLib</Namespace>
 </Query>
 
-var template="{{Name}}";
-var model=new {Name="Samuel"};
+var template=
+@"
+{{var divStyle=display:none}}
+<div style=""{{divStyle}}"">Hey!I'm invinsible</div>
+";
+var model=new {};
 var result=new Honjo().Compile(template, model );
 result.Dump();

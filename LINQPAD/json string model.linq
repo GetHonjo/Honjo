@@ -4,6 +4,6 @@
 </Query>
 
 var template="{{Name}}";
-var model=new {Name="Samuel"};
-var result=new Honjo().Compile(template, model );
+var model= "{\"Name\":\"Samuel\"}";
+var result=new Honjo().Compile(template, model);
 result.Dump();
